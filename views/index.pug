@@ -1,0 +1,36 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+  p#message
+  form
+      input#text(type="text" placeholder="请输入消息")
+      button#btn 发送
+  img#img(src="")
+
+
+  script.
+          var home = io.connect('http://localhost:3000');
+          home.on('news', function (data) {
+              console.log(data);
+              home.emit('my other event', {my: 'data'});
+          });
+          home.on('add item', function (data) {
+              console.log(data);
+              $('#name').text(data.name);
+              $('#content').text(data.content);
+              home.emit('report', {user: `姜夔`, content: `疏影横斜水清浅，暗香浮动月黄昏`});
+          });
+          home.on('redisMsg', function(data){
+              console.log(data);
+              $('#message').text(data);
+          });
+          $('#btn').click(function(){
+              const value = $('#text').val();
+              console.log(value)
+              home.emit('speak', value);
+          });
+          home.on('image', function(data){
+              $('#img').attr(src=data);
+          });

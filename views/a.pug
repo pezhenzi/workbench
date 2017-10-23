@@ -1,0 +1,19 @@
+extends layout
+
+block content
+    h1 #{msg}
+
+    script.
+        var pageA = io.connect('http://localhost:3000/a');
+        pageA.on('just for room first', function (data) {
+            console.log(data.msg);
+        })
+        pageA.on('user attach', function (data) {
+            $('#greet').append(data.name);
+            pageA.emit(
+                'user msg',
+                {msg: `Hello everyone before!`},
+                function (data) {
+                    console.log(data);
+                });
+        });
