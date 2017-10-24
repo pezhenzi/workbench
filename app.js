@@ -1,5 +1,6 @@
 let express = require('express');
 let path = require('path');
+let mongoose = require('mongoose');
 let favicon = require('serve-favicon');
 let logger = require('morgan');
 let cookieParser = require('cookie-parser');
@@ -8,7 +9,15 @@ let pug = require('pug');
 let index = require('./routes/index');
 let users = require('./routes/users');
 
+mongoose.connect('mongodb://localhost:27017/workbench');
+let db = mongoose.connection;
+db.on('error', console.error.bind(console, 'error:'));
+db.once('open', function(){
+    console.log('OK');
+});
+
 let app = express();
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
