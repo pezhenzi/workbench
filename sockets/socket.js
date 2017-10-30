@@ -1,9 +1,8 @@
 const redis = require('redis');
+const report = require('../models/reports');
 const sub = redis.createClient(), pub = redis.createClient();  //定义两个client，一个用于subscribe，一个用于publish。
 const img = require('../base64/001');
 module.exports = function (io) {
-
-
     sub.subscribe('test_channel', function(e){
         console.log('subscribe channel : ' + 'test_channel');
     });
@@ -33,6 +32,16 @@ module.exports = function (io) {
             });
             socket.on('add report', function(data){ //参数列表中加入error，就会拿不到data，原因未知！
                 socket.broadcast.emit('new report from others', data);
+                report.create({
+                    title:data.title,
+                    content:data.content,
+                    author:data.author,
+                    reportId:data.reportId,
+                }, function(err){
+                    if(err){
+                        console.log(err);
+                    }
+                });
             })
         }
     );

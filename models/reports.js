@@ -7,6 +7,7 @@ let reportsSchema = mongoose.Schema({
     createTime:Number,
     status:String,
     index:Number,
+    reportId:String,
 });
 
 let Report = mongoose.model('Report', reportsSchema);
