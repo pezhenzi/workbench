@@ -33,4 +33,31 @@ router.post('/save-info', function(req, res, next){
     res.json(`save info done.`);
 });
 
+router.post('/login', function(req,res,next){
+    let form = new formidable.IncomingForm();
+    form.keepExtensions = true;
+    form.multiples = true;
+    form.parse(req, function(err, fields, files){
+        const secret = 'jnwbnewsworkbench';
+        const pwd = crypto.createHmac('sha1', secret).update(fields.password).digest('hex');
+        const account = fields.account;
+        user.findOne({account:account}, function(err,data){
+            if(err){
+                console.log(err);
+            } else{
+                console.log(pwd);
+                console.log(data.password);
+                if(data.account === account && data.password === pwd){
+                    console.log('info right');
+                    res.json({'token':data.id});
+                } else{
+                    console.log('info wrong');
+                    res.status(500).json({error:`Login failed.`});
+                }
+            }
+        })
+
+    })
+});
+
 module.exports = router;
