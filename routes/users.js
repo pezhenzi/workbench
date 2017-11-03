@@ -48,10 +48,8 @@ router.post('/login', function(req,res,next){
                 console.log(pwd);
                 console.log(data.password);
                 if(data.account === account && data.password === pwd){
-                    console.log('info right');
-                    res.json({'token':data.id});
+                    res.json({token:data.id, name:data.name, account:data.account, role:data.role});
                 } else{
-                    console.log('info wrong');
                     res.status(500).json({error:`Login failed.`});
                 }
             }
