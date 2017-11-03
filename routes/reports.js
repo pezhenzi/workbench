@@ -15,7 +15,9 @@ router.post('/add-report', function(req, res){
             author:fields.author,
             reportId:fields.reportId,
         }, function(err){
-            if(err) console.log(err);
+            if(err){
+                console.log(err);
+            }
             res.json('Add report success!');
         });
     })
