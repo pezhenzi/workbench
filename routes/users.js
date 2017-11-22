@@ -45,8 +45,6 @@ router.post('/login', function(req,res,next){
             if(err){
                 console.log(err);
             } else{
-                console.log(pwd);
-                console.log(data.password);
                 if(data.account === account && data.password === pwd){
                     res.json({token:data.id, name:data.name, account:data.account, role:data.role});
                 } else{

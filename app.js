@@ -9,6 +9,7 @@ let pug = require('pug');
 let index = require('./routes/index');
 let users = require('./routes/users');
 let report = require('./routes/reports');
+let card = require('./routes/cards');
 
 mongoose.connect('mongodb://localhost:27017/workbench');
 let db = mongoose.connection;
@@ -43,6 +44,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/users', users);
 app.use('/report', report);
+app.use('/card', card);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

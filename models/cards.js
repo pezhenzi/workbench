@@ -12,7 +12,8 @@ let cardSchema = mongoose.Schema({
     createTime:Number,
     progress:Number,
     index:Number,
-    status:String
+    status:String,
+    cardId:String,
 });
 
 let Card = mongoose.model('Card', cardSchema);

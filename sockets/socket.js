@@ -36,13 +36,28 @@ module.exports = function (io) {
                     title:data.title,
                     content:data.content,
                     author:data.author,
+                    status:data.status,
                     reportId:data.reportId,
                 }, function(err){
                     if(err){
                         console.log(err);
                     }
                 });
-            })
+                console.log(`One new report coming`);
+            });
+            socket.on('app emit test', (data) => {
+                console.log(data.msg);
+            });
+            socket.on('use target report', function(data){
+              console.log(data);
+              socket.broadcast.emit('use one report', data);
+            });
+            socket.on('top target report', (data) => {
+              socket.broadcast.emit('top one report', data);
+            });
+            socket.on('drop target report', (data) => {
+              socket.broadcast.emit('drop one report', data);
+            });
         }
     );
 
