@@ -5,7 +5,7 @@ let cardSchema = mongoose.Schema({
     content:String,
     author:String,
     editor:String,
-    journalist:String,
+    journalist:[String],
     documents:[{user:String, content:String, timestamp:Number}],
     accessory:[{user:String, url:String, timestamp:Number}],
     comments:[{user:String, content:String, timestamp:Number}],
@@ -14,6 +14,7 @@ let cardSchema = mongoose.Schema({
     index:Number,
     status:String,
     cardId:String,
+    editorIdea:String,
 });
 
 let Card = mongoose.model('Card', cardSchema);

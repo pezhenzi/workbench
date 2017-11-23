@@ -13,10 +13,12 @@ router.post('/save-card', function(req, res){
             title:fields.title,
             content:fields.content,
             author:fields.author,
-            editor:field.editor,
+            editor:fields.editor,
             cardId:fields.cardId,
-            createTime:field.createTime,
-            status:fields.status,
+            createTime:fields.createTime,
+            status:'active',
+            journalist:fields.journalist,
+            editorIdea:fields.editorIdea,
         }, function(err){
             if(err){
                 console.log(err);
