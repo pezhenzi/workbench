@@ -15,6 +15,7 @@ router.post('/save-card', function(req, res){
             author:fields.author,
             editor:fields.editor,
             cardId:fields.cardId,
+            reportId:fields.reportId,
             createTime:fields.createTime,
             status:'active',
             journalist:fields.journalist,

@@ -14,6 +14,7 @@ let cardSchema = mongoose.Schema({
     index:Number,
     status:String,
     cardId:String,
+    reportId:String,
     editorIdea:String,
 });
 
