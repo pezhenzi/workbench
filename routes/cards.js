@@ -45,8 +45,19 @@ router.post('/upload-file', function(req, res){
     form.multiples = true;
     form.maxFieldsSize = 8 * 1024 * 1024;
     form.parse(req, function(err, fields, files){
-        console.log(files);
-        res.json({msg:'OK'});
+        filesArray = Object.keys(files);
+        pathArray = [];
+        if(filesArray.length >=1){
+            for(let i=0; i<filesArray.length; i++){
+                const path = files[filesArray[i]].path.slice(6);
+                pathArray.push(`http://10.10.60.47:3000${path}`);  //files.file.path这样就能得到文件的本地相对路径
+            }
+            console.log(pathArray);
+            res.json({msg:'OK', paths:pathArray});
+        } else{
+            res.json({msg:'No file uploaded'});
+        }
+
     });
 });
 
