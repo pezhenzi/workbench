@@ -59,8 +59,7 @@ module.exports = function (io) {
               socket.broadcast.emit('drop one report', data);
             });
             socket.on('add new card', function(data){
-                console.log(data);
-                socket.broadcast.emit('add one card', data)
+                socket.broadcast.emit('add one card', data);
             });
         }
     );
